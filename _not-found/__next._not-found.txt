@@ -1,0 +1,4 @@
+1:"$Sreact.fragment"
+2:I[39756,["/seokwon_choi_profile-main/_next/static/chunks/57dafc6bf258fc71.js","/seokwon_choi_profile-main/_next/static/chunks/2f0939e66d67ef83.js"],"default"]
+3:I[37457,["/seokwon_choi_profile-main/_next/static/chunks/57dafc6bf258fc71.js","/seokwon_choi_profile-main/_next/static/chunks/2f0939e66d67ef83.js"],"default"]
+0:{"buildId":"JIl392g0kz0b1lOZU1kqY","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
