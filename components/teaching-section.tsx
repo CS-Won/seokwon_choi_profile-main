@@ -54,6 +54,20 @@ const ENTRIES: { id: string; blocks: TeachingBlock[] }[] = [
     ],
   },
   {
+    id: "qml-lecturer",
+    blocks: [
+      { type: "heading", text: "Quantum Machine Learning (Lecturer)" },
+      { type: "text", text: "Spring 2025, QIYA" },
+      {
+        type: "link",
+        link: {
+          kind: "website",
+          href: "/teaching/quantum-machine-learning",
+        },
+      },
+    ],
+  },
+  {
     id: "qm-tutor",
     blocks: [
       { type: "heading", text: "Quantum Mechanics (Tutor)" },

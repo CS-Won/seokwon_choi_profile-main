@@ -2,9 +2,10 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://CS-Won.github.io/CS-Won",
+  "homepage": "https://cs-won.github.io/seokwon_choi_profile-main",
   "scripts": {
     "build": "next build && node -e \"require('fs').writeFileSync(require('path').join('out','.nojekyll'),'')\"",
+    "deploy:gh-pages": "npm run build && npx --yes gh-pages@6 -d out -t",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start"
