@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
-2:I[39756,["/seokwon_choi_profile-main/_next/static/chunks/57dafc6bf258fc71.js","/seokwon_choi_profile-main/_next/static/chunks/2f0939e66d67ef83.js"],"default"]
-3:I[37457,["/seokwon_choi_profile-main/_next/static/chunks/57dafc6bf258fc71.js","/seokwon_choi_profile-main/_next/static/chunks/2f0939e66d67ef83.js"],"default"]
-0:{"buildId":"18IMh6wjrbpRG__nbcukD","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+2:I[39756,["/seokwon_choi_profile-main/_next/static/chunks/345d01d464d9d0ad.js","/seokwon_choi_profile-main/_next/static/chunks/2f0939e66d67ef83.js","/seokwon_choi_profile-main/_next/static/chunks/2b484f725fefecad.js"],"default"]
+3:I[37457,["/seokwon_choi_profile-main/_next/static/chunks/345d01d464d9d0ad.js","/seokwon_choi_profile-main/_next/static/chunks/2f0939e66d67ef83.js","/seokwon_choi_profile-main/_next/static/chunks/2b484f725fefecad.js"],"default"]
+0:{"buildId":"46RTfu-bfdLSJEaKDQAL-","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
