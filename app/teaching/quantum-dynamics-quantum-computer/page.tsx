@@ -1,5 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import {
+  QDYN_SCHEDULE,
+  QDYN_PDF_HREF,
+  QDYN_SLIDE_HREF,
+} from "@/lib/teaching-quantum-dynamics-qcomputer"
 
 export const metadata: Metadata = {
   title: "Quantum Dynamics using Quantum Computer (Spring 2025) | Seokwon Choi",
@@ -7,89 +12,15 @@ export const metadata: Metadata = {
     "Lecture materials — quantum quench dynamics, XXZ / Heisenberg spin chains, and error mitigation on IBM quantum hardware (QISCA, Spring 2025).",
 }
 
-const SLIDE_HREF =
-  "/teaching/quantum-dynamics-qc/CHOISEOKWON_yonsei_IBM_Aug27th.pptx"
-const PDF_HREF = "/teaching/quantum-dynamics-qc/Spin_Chain_Model_Yonsei.pdf"
-
-const SCHEDULE: {
-  week: string
-  topic: string
-  summary: string
-  slideHref?: string
-  materialHref?: string
-}[] = [
-  {
-    week: "0",
-    topic: "Introduction",
-    summary:
-      "Motivation for simulating many-body quantum dynamics on near-term hardware: noise limits and the role of quantum error mitigation before fault tolerance. Overview of quench dynamics in spin chains as a concrete setting where circuits, mitigation, and observables come together—aligned with the Yonsei–IBM lecture materials.",
-    slideHref: SLIDE_HREF,
-    materialHref: PDF_HREF,
-  },
-  {
-    week: "1",
-    topic: "XXZ spin chain",
-    summary:
-      "The XXZ / Heisenberg spin-chain Hamiltonian as a standard model for correlated quantum matter; parameters, symmetries, and how quenches (sudden changes of couplings or fields) drive non-equilibrium dynamics relevant to the manuscript discussion.",
-    slideHref: SLIDE_HREF,
-    materialHref: PDF_HREF,
-  },
-  {
-    week: "2",
-    topic: "Implementation of time evolution of the Hamiltonian",
-    summary:
-      "Trotterized real-time evolution: decomposing the propagator into gate sequences suitable for superconducting processors; depth vs. accuracy trade-offs when implementing long-time dynamics on IBM systems.",
-    slideHref: SLIDE_HREF,
-    materialHref: PDF_HREF,
-  },
-  {
-    week: "3",
-    topic: "Quantum error mitigation",
-    summary:
-      "Mitigating device noise for utility-scale simulations: zero-noise extrapolation and related strategies (including self-mitigation ideas in the notes), and when they remain reliable for deep circuits with many two-qubit gates.",
-    slideHref: SLIDE_HREF,
-    materialHref: PDF_HREF,
-  },
-  {
-    week: "4",
-    topic: "Tensor network and entanglement entropy",
-    summary:
-      "Why entanglement growth after a quench matters; connecting tensor-network / theoretical pictures of entanglement entropy with what can be estimated or cross-checked on hardware when mitigation is applied.",
-    slideHref: SLIDE_HREF,
-    materialHref: PDF_HREF,
-  },
-  {
-    week: "5",
-    topic: "Observable measurement",
-    summary:
-      "Measuring local and global observables in practice: statistical uncertainty, readout effects, and combining mitigation with measurement protocols to compare results against classical or tensor-network benchmarks.",
-    slideHref: SLIDE_HREF,
-    materialHref: PDF_HREF,
-  },
-]
-
-function MaterialCell({
-  slideHref = "#",
-  materialHref = "#",
-}: {
-  slideHref?: string
-  materialHref?: string
-}) {
+function WeekPageLink({ week }: { week: string }) {
+  const label = `week_${week}_page`
   return (
-    <div className="flex flex-col gap-1.5">
-      <Link
-        href={slideHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Slide]
-      </Link>
-      <Link
-        href={materialHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Material]
-      </Link>
-    </div>
+    <Link
+      href={`/teaching/quantum-dynamics-quantum-computer/week/${week}`}
+      className="font-mono text-sm font-medium text-accent underline underline-offset-2 hover:text-accent/90"
+    >
+      {label}
+    </Link>
   )
 }
 
@@ -160,14 +91,14 @@ export default function QuantumDynamicsQuantumComputerPage() {
             <p>
               <span className="font-medium text-foreground">Primary materials:</span>{" "}
               <Link
-                href={SLIDE_HREF}
+                href={QDYN_SLIDE_HREF}
                 className="font-medium text-accent underline underline-offset-4 hover:text-accent/90"
               >
                 Slides (PowerPoint, IBM / Yonsei)
               </Link>
               {" · "}
               <Link
-                href={PDF_HREF}
+                href={QDYN_PDF_HREF}
                 className="font-medium text-accent underline underline-offset-4 hover:text-accent/90"
               >
                 Manuscript (PDF)
@@ -216,8 +147,9 @@ export default function QuantumDynamicsQuantumComputerPage() {
               Conceptual outline — mapped to the slide deck sections and the PDF
             </li>
             <li>
-              Downloadable materials — same [Slide] / [Material] links in the schedule
-              table
+              Weekly pages — open{" "}
+              <span className="font-mono text-xs md:text-sm">week_n_page</span> links
+              in the schedule for summaries and per-week [Slide] / [Material] links
             </li>
           </ul>
         </section>
@@ -227,7 +159,7 @@ export default function QuantumDynamicsQuantumComputerPage() {
             Schedule
           </h2>
           <div className="overflow-x-auto rounded-lg border border-border">
-            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
                   <th className="px-3 py-2.5 font-semibold text-foreground">
@@ -240,12 +172,12 @@ export default function QuantumDynamicsQuantumComputerPage() {
                     Summary
                   </th>
                   <th className="px-3 py-2.5 font-semibold text-foreground">
-                    Material
+                    Page
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {SCHEDULE.map((row) => (
+                {QDYN_SCHEDULE.map((row) => (
                   <tr
                     key={row.week}
                     className="border-b border-border last:border-b-0"
@@ -260,10 +192,7 @@ export default function QuantumDynamicsQuantumComputerPage() {
                       {row.summary}
                     </td>
                     <td className="px-3 py-2.5 align-top">
-                      <MaterialCell
-                        slideHref={row.slideHref}
-                        materialHref={row.materialHref}
-                      />
+                      <WeekPageLink week={row.week} />
                     </td>
                   </tr>
                 ))}

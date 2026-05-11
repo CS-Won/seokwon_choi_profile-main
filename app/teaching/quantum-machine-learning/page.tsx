@@ -1,79 +1,22 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { QML_SCHEDULE } from "@/lib/teaching-quantum-machine-learning"
 
 export const metadata: Metadata = {
   title: "Quantum Machine Learning (Spring 2025) | Seokwon Choi",
   description:
-    "Course outline — Quantum Machine Learning (QIYA, Spring 2025), from classical machine learning basics to quantum neural networks.",
+    "Course outline — Quantum Machine Learning (QIYA introductory seminar, Spring 2025), from classical machine learning and the variational quantum algorithm framework to data encoding and quantum neural networks.",
 }
 
-const SCHEDULE: {
-  week: string
-  topic: string
-  summary: string
-  slideHref?: string
-  materialHref?: string
-}[] = [
-  {
-    week: "0",
-    topic: "Introduction",
-    summary:
-      "Course orientation and motivation: why machine learning is a useful lens for quantum information applications, what types of problems quantum-enhanced models target, and how the lecture connects classical and quantum workflows.",
-  },
-  {
-    week: "1",
-    topic: "Machine learning",
-    summary:
-      "Brief review of core machine-learning ideas used in this class: supervised and unsupervised settings, optimization-based training, model capacity and generalization, and why linear algebra and probability dominate practical ML pipelines.",
-  },
-  {
-    week: "2",
-    topic: "Quantum machine learning",
-    summary:
-      "High-level map of quantum machine learning: variational vs. kernel-style approaches, where quantum subroutines may offer speed or expressivity advantages, and realistic constraints from current noisy hardware.",
-  },
-  {
-    week: "3",
-    topic: "Data encoding",
-    summary:
-      "How classical data is embedded into quantum states: angle, basis, and amplitude-style encodings; trade-offs in circuit depth and qubit cost; and implications for trainability and practical model design.",
-  },
-  {
-    week: "4",
-    topic: "Neural networks",
-    summary:
-      "Concise recap of neural-network fundamentals: feed-forward architecture, activation functions, backpropagation intuition, and how representational depth influences function approximation in classical learning.",
-  },
-  {
-    week: "5",
-    topic: "Quantum neural networks",
-    summary:
-      "From classical neural-network ideas to parameterized quantum circuits: variational quantum layers, measurement-based outputs, hybrid optimization loops, and typical issues such as barren plateaus and noise sensitivity.",
-  },
-]
-
-function MaterialCell({
-  slideHref = "#",
-  materialHref = "#",
-}: {
-  slideHref?: string
-  materialHref?: string
-}) {
+function WeekPageLink({ week }: { week: string }) {
+  const label = `week_${week}_page`
   return (
-    <div className="flex flex-col gap-1.5">
-      <Link
-        href={slideHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Slide]
-      </Link>
-      <Link
-        href={materialHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Material]
-      </Link>
-    </div>
+    <Link
+      href={`/teaching/quantum-machine-learning/week/${week}`}
+      className="font-mono text-sm font-medium text-accent underline underline-offset-2 hover:text-accent/90"
+    >
+      {label}
+    </Link>
   )
 }
 
@@ -113,8 +56,10 @@ export default function QuantumMachineLearningPage() {
           Quantum Machine Learning (Lecturer)
         </h1>
         <p className="mt-2 text-sm text-muted-foreground md:text-base">
-          Spring 2025 · QIYA · Outline based on the Quantum Machine Learning slide
-          deck.
+          Spring 2025 · QIYA · QISCA introductory seminar. Weekly pages expand
+          on the slide deck (ML → QML → Data encoding → Neural networks →
+          Quantum neural networks); primary references are listed below
+          (APA-style).
         </p>
 
         <section className="mt-10 space-y-4">
@@ -123,18 +68,52 @@ export default function QuantumMachineLearningPage() {
           </h2>
           <div className="space-y-3 text-sm leading-relaxed text-foreground md:text-base">
             <p>
-              This lecture introduces quantum machine learning by connecting standard
-              machine-learning intuition with quantum circuit models. Rather than
-              treating quantum methods as a separate topic, the course tracks how
-              familiar concepts—feature representation, model architecture, and
-              trainable parameters—change when data and computation are moved into a
-              quantum setting.
+              This seminar introduces quantum machine learning (QML) by tracking
+              the standard machine-learning loop and asking, at each step,
+              &quot;what changes when this is done on a quantum computer?&quot;
+              The variational quantum algorithm framework of Cerezo et al.
+              (2021) is used as the operational backbone: encode the data,
+              apply a parametrized circuit, measure, and update parameters
+              with a classical optimizer.
             </p>
             <p>
-              The flow follows the presentation sequence in the provided QIYA
-              materials: starting from classical ML basics, then moving to quantum ML
-              viewpoints, data encoding choices, neural networks, and finally quantum
-              neural networks with hybrid optimization loops.
+              Encoding choices and supervised-learning setups follow Schuld &amp;
+              Petruccione (2018). The flow matches the QIYA deck — Machine
+              Learning, Quantum Machine Learning, Data Encoding, Neural
+              Networks, Quantum Neural Networks — including training on
+              hardware and data re-uploading. For NISQ limitations such as
+              barren plateaus, see McClean et al. (2018).
+            </p>
+          </div>
+        </section>
+
+        <section className="mt-10 space-y-4">
+          <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            Reference
+          </h2>
+          <p className="text-xs text-muted-foreground md:text-sm">
+            References follow APA 7th edition (author–date). Hanging indent:
+            second and later lines of each entry align with the text block.
+          </p>
+          <div className="space-y-4 text-sm leading-relaxed text-foreground">
+            <p className="ps-8 -indent-8">
+              Cerezo, M., Arrasmith, A., Babbush, R., Benjamin, S. C., Endo,
+              S., Fujii, K., McClean, J. R., Mitarai, K., Yuan, X., Cincio,
+              L., &amp; Coles, P. J. (2021). Variational quantum algorithms.{" "}
+              <em>Nature Reviews Physics</em>, <em>3</em>(9), 625–644.{" "}
+              https://doi.org/10.1038/s42254-021-00348-9
+            </p>
+            <p className="ps-8 -indent-8">
+              McClean, J. R., Boixo, S., Smelyanskiy, V. N., Babbush, R., &amp;
+              Neven, H. (2018). Barren plateaus in quantum neural network
+              training landscapes. <em>Nature Communications</em>,{" "}
+              <em>9</em>, Article 4812.{" "}
+              https://doi.org/10.1038/s41467-018-07090-4
+            </p>
+            <p className="ps-8 -indent-8">
+              Schuld, M., &amp; Petruccione, F. (2018).{" "}
+              <em>Supervised learning with quantum computers</em>. Springer.
+              https://doi.org/10.1007/978-3-319-96424-9
             </p>
           </div>
         </section>
@@ -144,10 +123,12 @@ export default function QuantumMachineLearningPage() {
             Prerequisites
           </h2>
           <p className="text-sm leading-relaxed text-foreground md:text-base">
-            Basic linear algebra and probability are expected, along with introductory
-            familiarity with quantum states and gates. Prior deep-learning experience
-            helps but is not required; key neural-network concepts are reviewed before
-            the quantum extensions.
+            Basic linear algebra (vectors, matrices, inner products) and
+            probability. Introductory quantum computing — kets, unitaries,
+            Pauli operators, simple circuits — is expected from Week 2 onward.
+            Prior deep-learning experience helps but is not required; the
+            classical neural-network background needed for QNNs is reviewed in
+            Week 4, and the quantum extension follows in Week 5.
           </p>
         </section>
 
@@ -174,11 +155,15 @@ export default function QuantumMachineLearningPage() {
             Course structure
           </h2>
           <ul className="list-inside list-disc space-y-1 text-sm text-foreground md:text-base">
-            <li>Concept-focused lectures mapped to the slide deck sections</li>
-            <li>Comparative framing: classical ML vs. quantum ML workflow</li>
             <li>
-              Schedule includes [Slide] / [Material] placeholders for consistency with
-              other teaching pages
+              Conceptual schedule — aligned with the QIYA slide deck and the
+              references above
+            </li>
+            <li>
+              Weekly pages — use{" "}
+              <span className="font-mono text-xs md:text-sm">week_n_page</span>{" "}
+              in the schedule for expanded notes with figures, derivations,
+              and in-text citations
             </li>
           </ul>
         </section>
@@ -188,7 +173,7 @@ export default function QuantumMachineLearningPage() {
             Schedule
           </h2>
           <div className="overflow-x-auto rounded-lg border border-border">
-            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
                   <th className="px-3 py-2.5 font-semibold text-foreground">
@@ -201,12 +186,12 @@ export default function QuantumMachineLearningPage() {
                     Summary
                   </th>
                   <th className="px-3 py-2.5 font-semibold text-foreground">
-                    Material
+                    Page
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {SCHEDULE.map((row) => (
+                {QML_SCHEDULE.map((row) => (
                   <tr
                     key={row.week}
                     className="border-b border-border last:border-b-0"
@@ -221,10 +206,7 @@ export default function QuantumMachineLearningPage() {
                       {row.summary}
                     </td>
                     <td className="px-3 py-2.5 align-top">
-                      <MaterialCell
-                        slideHref={row.slideHref}
-                        materialHref={row.materialHref}
-                      />
+                      <WeekPageLink week={row.week} />
                     </td>
                   </tr>
                 ))}

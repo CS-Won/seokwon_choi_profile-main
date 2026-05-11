@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { IQC_SCHEDULE } from "@/lib/teaching-intro-to-quantum-computing"
 
 export const metadata: Metadata = {
   title: "Introduction to Quantum Computing (Winter 2024) | Seokwon Choi",
@@ -7,103 +8,15 @@ export const metadata: Metadata = {
     "Course syllabus — Introduction to Quantum Computing, Yonsei Premium Online Lecture (Winter 2024).",
 }
 
-const SCHEDULE: {
-  week: string
-  topic: string
-  summary: string
-  slideHref?: string
-  materialHref?: string
-}[] = [
-  {
-    week: "0",
-    topic: "Orientation",
-    summary:
-      "Overview of the course and how the remaining sessions are organized.",
-  },
-  {
-    week: "1",
-    topic: "What is a quantum computer?",
-    summary:
-      "Quantum states, superposition, and entanglement as foundations for understanding quantum computing; contrast with classical computing principles.",
-  },
-  {
-    week: "2",
-    topic: "Mathematics for quantum computing (1)",
-    summary:
-      "Essential linear algebra: vectors, matrices, and tensors used throughout the course.",
-  },
-  {
-    week: "3",
-    topic: "Mathematics for quantum computing (2)",
-    summary:
-      "Polarization and energy levels as examples that recur in quantum circuits.",
-  },
-  {
-    week: "4",
-    topic: "Quantum circuits (1)",
-    summary:
-      "Classical logic gates and circuits; introduction to quantum gates and how they differ; composing simple quantum circuits.",
-  },
-  {
-    week: "5",
-    topic: "Quantum circuits (2)",
-    summary:
-      "Further practice with quantum circuits; quantum teleportation as an application.",
-  },
-  {
-    week: "6",
-    topic: "Quantum Fourier transform (1)",
-    summary:
-      "Prerequisites for the Fourier perspective: orthogonality of functions and treating functions as vectors.",
-  },
-  {
-    week: "7",
-    topic: "Quantum Fourier transform (2)",
-    summary:
-      "Classical Fourier ideas and the quantum Fourier transform (QFT); implementing QFT with quantum circuits.",
-  },
-  {
-    week: "8",
-    topic: "Deutsch–Jozsa algorithm",
-    summary:
-      "Oracle (black-box) models; the Deutsch–Jozsa algorithm and an example of a quantum speedup.",
-  },
-  {
-    week: "9",
-    topic: "Shor’s algorithm",
-    summary:
-      "Integer factoring with classical vs. quantum approaches; Shor’s algorithm and the quantum advantage in this setting.",
-  },
-  {
-    week: "10",
-    topic: "Quantum machine learning",
-    summary:
-      "Basic machine-learning ideas; encoding classical information into quantum form; introduction to quantum neural network structures.",
-  },
-]
-
-function MaterialCell({
-  slideHref = "#",
-  materialHref = "#",
-}: {
-  slideHref?: string
-  materialHref?: string
-}) {
+function WeekPageLink({ week }: { week: string }) {
+  const label = `week_${week}_page`
   return (
-    <div className="flex flex-col gap-1.5">
-      <Link
-        href={slideHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Slide]
-      </Link>
-      <Link
-        href={materialHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Material]
-      </Link>
-    </div>
+    <Link
+      href={`/teaching/intro-to-quantum-computing/week/${week}`}
+      className="font-mono text-sm font-medium text-accent underline underline-offset-2 hover:text-accent/90"
+    >
+      {label}
+    </Link>
   )
 }
 
@@ -215,6 +128,11 @@ export default function IntroToQuantumComputingPage() {
           <ul className="list-inside list-disc space-y-1 text-sm text-foreground md:text-base">
             <li>Video lectures — primary delivery</li>
             <li>Online assignments — graded component</li>
+            <li>
+              Weekly pages — click{" "}
+              <span className="font-mono text-xs md:text-sm">week_n_page</span>{" "}
+              in the schedule for a detailed write-up of each session
+            </li>
           </ul>
         </section>
 
@@ -223,7 +141,7 @@ export default function IntroToQuantumComputingPage() {
             Schedule
           </h2>
           <div className="overflow-x-auto rounded-lg border border-border">
-            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
                   <th className="px-3 py-2.5 font-semibold text-foreground">
@@ -236,12 +154,12 @@ export default function IntroToQuantumComputingPage() {
                     Summary
                   </th>
                   <th className="px-3 py-2.5 font-semibold text-foreground">
-                    Material
+                    Page
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {SCHEDULE.map((row) => (
+                {IQC_SCHEDULE.map((row) => (
                   <tr
                     key={row.week}
                     className="border-b border-border last:border-b-0"
@@ -256,10 +174,7 @@ export default function IntroToQuantumComputingPage() {
                       {row.summary}
                     </td>
                     <td className="px-3 py-2.5 align-top">
-                      <MaterialCell
-                        slideHref={row.slideHref}
-                        materialHref={row.materialHref}
-                      />
+                      <WeekPageLink week={row.week} />
                     </td>
                   </tr>
                 ))}

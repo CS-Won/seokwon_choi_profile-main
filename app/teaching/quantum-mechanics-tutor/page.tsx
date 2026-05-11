@@ -1,91 +1,22 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { QMT_SCHEDULE } from "@/lib/teaching-quantum-mechanics-tutor"
 
 export const metadata: Metadata = {
   title: "Quantum Mechanics I — Tutor sessions (Spring 2025) | Seokwon Choi",
   description:
-    "Eight-week tutorial outline for Quantum Mechanics I (Griffiths), aligned with the Yonsei PHY3101 course plan — including midterm and final problem-solving weeks.",
+    "Eight-week tutorial outline for Quantum Mechanics I (Yonsei PHY3101) following Griffiths chapters 1–4, with worked midterm and final exam solutions.",
 }
 
-const SCHEDULE: {
-  week: string
-  topic: string
-  summary: string
-  slideHref?: string
-  materialHref?: string
-}[] = [
-  {
-    week: "1",
-    topic: "Introduction and the Schrödinger picture",
-    summary:
-      "Motivation for wave mechanics and the structure of the course (Griffiths Ch. 1; Feynman Vol. III Ch. 1–3 as optional perspective). The time-dependent and time-independent Schrödinger equations, normalization, probability density and current, and the physical interpretation of the wave function.",
-  },
-  {
-    week: "2",
-    topic: "One-dimensional potentials",
-    summary:
-      "Bound and scattering problems in 1D (Griffiths Ch. 2): infinite square well, finite wells, the harmonic oscillator preview, delta potentials, and qualitative features of quantization—energy levels, orthogonality of stationary states, and tunneling in simple models.",
-  },
-  {
-    week: "3",
-    topic: "Formalism: Hilbert space, observables, uncertainty",
-    summary:
-      "Mathematical backbone of quantum theory (linear-algebra appendix + Griffiths Ch. 3): state vectors in Hilbert space, operators representing observables, eigenvalues and measurement postulates, Hermitian / unitary operators, commutators, the generalized statistical interpretation, and the Heisenberg uncertainty principle in operator form.",
-  },
-  {
-    week: "4",
-    topic: "Midterm exam — worked practice problems",
-    summary:
-      "Problem-solving session oriented to the midterm: expected-style questions drawn from the material covered in the main course through the formalism and introductory 1D quantum mechanics (typical emphasis on interpretation of ψ, solving textbook 1D models, expectation values, commutators, and uncertainty estimates). We work through representative calculations and discuss common pitfalls.",
-  },
-  {
-    week: "5",
-    topic: "Harmonic oscillator and WKB",
-    summary:
-      "The quantum harmonic oscillator in algebraic and analytic forms (Griffiths Sec. 2.3): ladder operators, spectrum, and wavefunctions. Introduction to semiclassical ideas via the WKB approximation (Griffiths Ch. 9) for slowly varying potentials and connection formulas at turning points.",
-  },
-  {
-    week: "6",
-    topic: "Three dimensions and the hydrogen atom",
-    summary:
-      "Extension to 3D (Griffiths Sec. 4.1–4.2): separation of variables in Cartesian and spherical coordinates, central potentials, angular structure of hydrogen-like bound states, quantum numbers, and the physical interpretation of the radial probability density.",
-  },
-  {
-    week: "7",
-    topic: "Angular momentum and rotation",
-    summary:
-      "Orbital angular momentum operators, eigenvalues of L² and Lz, spherical harmonics, and how rotational symmetry organizes the spectrum (Griffiths Sec. 4.3). Connecting angular momentum quantum numbers to the hydrogen atom and to the general formulation of QM in three dimensions.",
-  },
-  {
-    week: "8",
-    topic: "Final exam — worked practice problems",
-    summary:
-      "Problem-solving session oriented to the final: expected-style questions spanning the full term—1D and 3D systems, harmonic oscillator and WKB sketches, hydrogen and angular momentum, and formalism-heavy items (operators, commutators, uncertainty, measurement probabilities). Focus on exam-style time management and checking units and boundary conditions.",
-  },
-]
-
-function MaterialCell({
-  slideHref = "#",
-  materialHref = "#",
-}: {
-  slideHref?: string
-  materialHref?: string
-}) {
+function WeekPageLink({ week }: { week: string }) {
+  const label = `week_${week}_page`
   return (
-    <div className="flex flex-col gap-1.5">
-      <Link
-        href={slideHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Slide]
-      </Link>
-      <Link
-        href={materialHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Material]
-      </Link>
-    </div>
+    <Link
+      href={`/teaching/quantum-mechanics-tutor/week/${week}`}
+      className="font-mono text-sm font-medium text-accent underline underline-offset-2 hover:text-accent/90"
+    >
+      {label}
+    </Link>
   )
 }
 
@@ -125,9 +56,9 @@ export default function QuantumMechanicsTutorPage() {
           Quantum Mechanics (Tutor)
         </h1>
         <p className="mt-2 text-sm text-muted-foreground md:text-base">
-          Spring 2025 · Yonsei University · Tutorial aligned with Quantum Mechanics
-          I (PHY3101); eight-week condensed schedule based on the official course
-          syllabus.
+          Spring 2025 · Yonsei PHY3101 · Eight-week tutorial covering
+          Griffiths chapters 1–4, with full worked midterm and final exam
+          solutions in Weeks 4 and 8.
         </p>
 
         <section className="mt-10 space-y-4">
@@ -136,35 +67,50 @@ export default function QuantumMechanicsTutorPage() {
           </h2>
           <div className="space-y-3 text-sm leading-relaxed text-foreground md:text-base">
             <p>
-              These sessions support{" "}
-              <span className="font-medium">Quantum Mechanics (1)</span> as offered
-              in the physics major: building fluency with the wave-function
-              formulation, the operator formalism, and standard exactly solvable
-              models in one and three dimensions. The pacing follows the topics and
-              chapter references in the department&apos;s course plan (Griffiths,{" "}
-              <cite className="not-italic">
-                Introduction to Quantum Mechanics
-              </cite>
-              , 3rd ed.), compressed into{" "}
-              <span className="font-medium">eight tutorial weeks</span> for
-              discussion and exercises.
-            </p>
-            <p>
-              <span className="font-medium">Main lecture:</span> Prof. Hyun
-              Seung-jun (PHY3101-01).{" "}
-              <span className="font-medium">Tutorial:</span> Seokwon Choi. Course
-              announcements, primary materials, and deadlines are distributed through
-              the official channels (e.g., LearnUs); this page is only a concise
-              English outline of how the tutor meetings are organized.
+              These tutorial sessions support{" "}
+              <span className="font-medium">Quantum Mechanics (1)</span> in the
+              physics major. The content follows{" "}
+              <em>Griffiths &amp; Schroeter, Introduction to Quantum
+              Mechanics</em> (3rd ed.), chapters 1–4: the wave function, the
+              time-independent Schrödinger equation in one dimension, the
+              Hilbert-space formalism, and quantum mechanics in three
+              dimensions (hydrogen and angular momentum).
             </p>
             <p>
               Weeks <span className="font-medium">4</span> and{" "}
-              <span className="font-medium">8</span> are dedicated to{" "}
-              <span className="font-medium">
-                exam-style problem solving
-              </span>
-              —midterm-focused and final-focused practice, respectively—rather than
-              introducing new theory.
+              <span className="font-medium">8</span> are dedicated to
+              exam-style problem solving, using the actual Spring-2024
+              midterm and final papers as the source material. Each problem
+              is solved in detail with attention to boundary conditions,
+              matching, and standard pitfalls.
+            </p>
+          </div>
+        </section>
+
+        <section className="mt-10 space-y-4">
+          <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            Reference
+          </h2>
+          <p className="text-xs text-muted-foreground md:text-sm">
+            Primary text and exam papers used to build the weekly notes
+            (APA 7th edition, hanging indent).
+          </p>
+          <div className="space-y-4 text-sm leading-relaxed text-foreground">
+            <p className="ps-8 -indent-8">
+              Griffiths, D. J., &amp; Schroeter, D. F. (2018).{" "}
+              <em>Introduction to quantum mechanics</em> (3rd ed.). Cambridge
+              University Press.{" "}
+              https://doi.org/10.1017/9781316995433
+            </p>
+            <p className="ps-8 -indent-8">
+              Department of Physics, Yonsei University. (2024).{" "}
+              <em>PHY3101 — Quantum Mechanics I, midterm examination</em>{" "}
+              [Course examination]. Yonsei University.
+            </p>
+            <p className="ps-8 -indent-8">
+              Department of Physics, Yonsei University. (2024).{" "}
+              <em>PHY3101 — Quantum Mechanics I, final examination</em>{" "}
+              [Course examination]. Yonsei University.
             </p>
           </div>
         </section>
@@ -174,11 +120,11 @@ export default function QuantumMechanicsTutorPage() {
             Prerequisites
           </h2>
           <p className="text-sm leading-relaxed text-foreground md:text-base">
-            As in the main course catalog: classical mechanics and calculus at the
-            level of a physics major; comfort with ordinary differential equations
-            and basic linear algebra is essential. The tutorial reviews mathematical
-            tools as needed but assumes students are following the primary lectures
-            in parallel.
+            Calculus through partial differential equations, basic linear
+            algebra (eigenvalues, Hermitian matrices), and classical
+            mechanics at the level of a physics major. The tutorial reviews
+            mathematical tools as needed but assumes students are following
+            the primary lectures in parallel.
           </p>
         </section>
 
@@ -206,19 +152,19 @@ export default function QuantumMechanicsTutorPage() {
           </h2>
           <ul className="list-inside list-disc space-y-1 text-sm text-foreground md:text-base">
             <li>
-              Weeks 1–3 and 5–7 — core topics mapped from the lecture syllabus
+              Weeks 1–3 and 5–7 — theory mapped from Griffiths chapters 1–4
             </li>
             <li>
-              Week 4 — midterm-oriented expected problems (worked solutions and
-              discussion)
+              Week 4 — midterm-oriented worked solutions (Spring 2024 paper)
             </li>
             <li>
-              Week 8 — final-oriented expected problems (worked solutions and
-              discussion)
+              Week 8 — final-oriented worked solutions (Spring 2024 paper)
             </li>
             <li>
-              Primary textbook: Griffiths (3rd ed.); supplementary reading often
-              includes Shankar and Feynman Lectures Vol. III, as in the course plan
+              Weekly pages — use{" "}
+              <span className="font-mono text-xs md:text-sm">week_n_page</span>{" "}
+              in the schedule for expanded notes with figures, derivations,
+              and full exam solutions
             </li>
           </ul>
         </section>
@@ -228,7 +174,7 @@ export default function QuantumMechanicsTutorPage() {
             Schedule
           </h2>
           <div className="overflow-x-auto rounded-lg border border-border">
-            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
                   <th className="px-3 py-2.5 font-semibold text-foreground">
@@ -241,12 +187,12 @@ export default function QuantumMechanicsTutorPage() {
                     Summary
                   </th>
                   <th className="px-3 py-2.5 font-semibold text-foreground">
-                    Material
+                    Page
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {SCHEDULE.map((row) => (
+                {QMT_SCHEDULE.map((row) => (
                   <tr
                     key={row.week}
                     className="border-b border-border last:border-b-0"
@@ -261,10 +207,7 @@ export default function QuantumMechanicsTutorPage() {
                       {row.summary}
                     </td>
                     <td className="px-3 py-2.5 align-top">
-                      <MaterialCell
-                        slideHref={row.slideHref}
-                        materialHref={row.materialHref}
-                      />
+                      <WeekPageLink week={row.week} />
                     </td>
                   </tr>
                 ))}

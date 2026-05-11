@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { RSHHL_SCHEDULE } from "@/lib/teaching-recommender-system-hhl"
 
 export const metadata: Metadata = {
   title: "Recommender system: through HHL (Winter 2024) | Seokwon Choi",
@@ -7,68 +8,15 @@ export const metadata: Metadata = {
     "Course outline — quantum and quantum-inspired recommendation systems, from the HHL linear-systems algorithm to low-rank matrix sampling (QISCA, Winter 2024).",
 }
 
-/** Slides and PDFs are not hosted on this site; placeholders keep the same table layout. */
-const SCHEDULE: {
-  week: string
-  topic: string
-  summary: string
-  slideHref?: string
-  materialHref?: string
-}[] = [
-  {
-    week: "0",
-    topic: "Introduction",
-    summary:
-      "From personalized recommendations to linear algebra: the user–item preference matrix, sparsity of observations, and the low-rank prior that makes aggressive dimension reduction plausible. How sampling-based and reconstruction-based classical methods differ, and where quantum linear-algebra primitives (notably HHL-style routines) enter the story before we specialize to recommendation.",
-  },
-  {
-    week: "1",
-    topic: "HHL algorithm",
-    summary:
-      "The Harrow–Hassidim–Lloyd algorithm for sparse linear systems Ax = b when the goal is to estimate features of x (e.g., expectation values x†Mx) rather than to read out x classically. Complexity in terms of condition number and sparsity, quantum state preparation assumptions, and why this framework suggests exponential speedups for certain matrix tasks—setting up its later use inside quantum recommendation pipelines.",
-  },
-  {
-    week: "2",
-    topic: "Recommendation problem",
-    summary:
-      "Formalizing recommendation as working with an m × n matrix of utilities revealed online, competitive guarantees, and reductions to reconstructing or approximating matrix entries. Classical schemes that implicitly rebuild large parts of the preference matrix versus those that target high-utility entries directly; sampling complexity and Monte Carlo / low-rank approximation viewpoints (as in the competitive recommendation and fast low-rank approximation literature).",
-  },
-  {
-    week: "3",
-    topic: "Recommendation system model — Quantum",
-    summary:
-      "The Kerenidis–Prakash quantum recommendation system: sampling good product suggestions in time poly(k) polylog(mn) for a rank-k preference matrix without classical reconstruction of the full matrix. Efficient projection of a vector onto the row space of an implicit matrix and how HHL-like subroutines fit into the overall quantum procedure.",
-  },
-  {
-    week: "4",
-    topic: "Recommendation system model — Quantum-inspired",
-    summary:
-      "Tang’s quantum-inspired classical algorithm: an ℓ²-norm sampling data structure that recovers comparable recommendation guarantees in O(poly(k) log(mn)) time, closing the exponential gap under analogous input assumptions. Interpreting “dequantization”: when quantum speedups reduce to clever classical sampling, and what remains as a guide for future quantum machine learning claims.",
-  },
-]
-
-function MaterialCell({
-  slideHref = "#",
-  materialHref = "#",
-}: {
-  slideHref?: string
-  materialHref?: string
-}) {
+function WeekPageLink({ week }: { week: string }) {
+  const label = `week_${week}_page`
   return (
-    <div className="flex flex-col gap-1.5">
-      <Link
-        href={slideHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Slide]
-      </Link>
-      <Link
-        href={materialHref}
-        className="font-medium text-accent underline underline-offset-2 hover:text-accent/90"
-      >
-        [Material]
-      </Link>
-    </div>
+    <Link
+      href={`/teaching/recommender-system-through-hhl/week/${week}`}
+      className="font-mono text-sm font-medium text-accent underline underline-offset-2 hover:text-accent/90"
+    >
+      {label}
+    </Link>
   )
 }
 
@@ -108,8 +56,8 @@ export default function RecommenderSystemThroughHhlPage() {
           Recommender system: through HHL (Lecturer)
         </h1>
         <p className="mt-2 text-sm text-muted-foreground md:text-base">
-          Winter 2024 · QISCA · Outline follows the in-class slide deck and reading
-          packet (slides and PDFs are not hosted on this website).
+          Winter 2024 · QISCA · Weekly notes follow the in-class slide deck; primary
+          papers are listed under Reference (APA-style).
         </p>
 
         <section className="mt-10 space-y-4">
@@ -123,17 +71,61 @@ export default function RecommenderSystemThroughHhlPage() {
               which items, and the platform must surface a few high-value suggestions
               without ever observing the full matrix. The course traces a line from
               classical low-rank and sampling ideas to the quantum algorithm of
-              Kerenidis and Prakash, and then to Tang&apos;s quantum-inspired
-              classical analogue—using the HHL linear-systems algorithm as the
-              conceptual backbone.
+              Kerenidis and Prakash (2016), and then to Tang&apos;s (2019)
+              quantum-inspired classical analogue — using the HHL linear-systems
+              algorithm (Harrow, Hassidim, &amp; Lloyd, 2009) as the conceptual
+              backbone.
             </p>
             <p>
               Along the way we emphasize what is actually being computed (samples
               from approximate row spaces versus explicit matrix reconstruction),
               what input models are assumed (query access, sampling oracles, data
-              structures supporting ℓ²-norm sampling), and how recent
-              &quot;dequantization&quot; results reshape claims about exponential
-              quantum speedups in machine learning.
+              structures supporting ℓ²-norm sampling), and how dequantization
+              results reshape claims about exponential quantum speedups in machine
+              learning.
+            </p>
+          </div>
+        </section>
+
+        <section className="mt-10 space-y-4">
+          <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            Reference
+          </h2>
+          <p className="text-xs text-muted-foreground md:text-sm">
+            References follow APA 7th edition (author–date). Hanging indent: second
+            and later lines of each entry align with the text block.
+          </p>
+          <div className="space-y-4 text-sm leading-relaxed text-foreground">
+            <p className="ps-8 -indent-8">
+              Achlioptas, D., &amp; McSherry, F. (2007). Fast computation of low-rank
+              matrix approximations. <em>Journal of the ACM</em>, <em>54</em>(2),
+              Article 9.
+            </p>
+            <p className="ps-8 -indent-8">
+              Drineas, P., Kerenidis, I., &amp; Raghavan, P. (2002). Competitive
+              recommendation systems. In <em>Proceedings of the 34th Annual ACM
+              Symposium on Theory of Computing</em> (pp. 82–90). Association for
+              Computing Machinery.
+            </p>
+            <p className="ps-8 -indent-8">
+              Frieze, A., Kannan, R., &amp; Vempala, S. (2004). Fast Monte-Carlo
+              algorithms for finding low-rank approximations. <em>Journal of the ACM</em>
+              , <em>51</em>(6), 1025–1041.
+            </p>
+            <p className="ps-8 -indent-8">
+              Harrow, A. W., Hassidim, A., &amp; Lloyd, S. (2009). Quantum algorithm
+              for linear systems of equations. <em>Physical Review Letters</em>,{" "}
+              <em>103</em>(15), Article 150502. https://doi.org/10.1103/PhysRevLett.103.150502
+            </p>
+            <p className="ps-8 -indent-8">
+              Kerenidis, I., &amp; Prakash, A. (2016). Quantum recommendation systems.{" "}
+              <em>arXiv</em>. https://arxiv.org/abs/1603.08675
+            </p>
+            <p className="ps-8 -indent-8">
+              Tang, E. (2019). A quantum-inspired classical algorithm for recommendation
+              systems. In <em>Proceedings of the 51st Annual ACM SIGACT Symposium on
+              Theory of Computing</em> (pp. 217–228). Association for Computing
+              Machinery. https://arxiv.org/abs/1807.04271
             </p>
           </div>
         </section>
@@ -145,7 +137,7 @@ export default function RecommenderSystemThroughHhlPage() {
           <p className="text-sm leading-relaxed text-foreground md:text-base">
             Solid linear algebra (matrices, norms, SVD / low-rank approximation at
             a working level) and basic probability. Introductory quantum computing
-            helps for Week 1 onward (states, unitaries, query complexity). Prior
+            helps from Week 1 onward (states, unitaries, query complexity). Prior
             exposure to randomized numerical linear algebra or recommendation
             literature is useful but not required.
           </p>
@@ -176,71 +168,11 @@ export default function RecommenderSystemThroughHhlPage() {
           <ul className="list-inside list-disc space-y-1 text-sm text-foreground md:text-base">
             <li>
               Conceptual schedule — aligned with the HHL slide deck and the readings
-              listed below
+              above
             </li>
             <li>
-              Materials — distributed through the QISCA course packet; the schedule
-              table retains [Slide] / [Material] placeholders for parity with other
-              course pages (links are not active here)
-            </li>
-          </ul>
-        </section>
-
-        <section className="mt-10 space-y-4">
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-            Course packet (readings)
-          </h2>
-          <ul className="list-inside list-disc space-y-2 text-sm text-muted-foreground md:text-base">
-            <li>
-              <span className="text-foreground">
-                Harrow, Hassidim, Lloyd —{" "}
-                <cite className="not-italic">
-                  Quantum algorithm for linear systems of equations
-                </cite>
-              </span>
-            </li>
-            <li>
-              <span className="text-foreground">
-                Kerenidis, Prakash —{" "}
-                <cite className="not-italic">Quantum Recommendation Systems</cite>
-              </span>
-            </li>
-            <li>
-              <span className="text-foreground">
-                Tang —{" "}
-                <cite className="not-italic">
-                  A quantum-inspired classical algorithm for recommendation systems
-                </cite>
-              </span>
-            </li>
-            <li>
-              <span className="text-foreground">
-                Drineas, Kerenidis, Raghavan —{" "}
-                <cite className="not-italic">
-                  Competitive Recommendation Systems
-                </cite>
-              </span>
-            </li>
-            <li>
-              <span className="text-foreground">
-                <cite className="not-italic">
-                  Fast computation of low-rank matrix approximations
-                </cite>{" "}
-                (course PDF)
-              </span>
-            </li>
-            <li>
-              <span className="text-foreground">
-                <cite className="not-italic">
-                  Fast Monte-Carlo Algorithms for finding Low-Rank Approximations
-                </cite>{" "}
-                (course PDF)
-              </span>
-            </li>
-            <li>
-              <span className="text-foreground">
-                <cite className="not-italic">HHL.pptx</cite> — slide deck
-              </span>
+              Weekly pages — use <span className="font-mono text-xs md:text-sm">week_n_page</span>{" "}
+              in the schedule for expanded notes with figures and in-text citations
             </li>
           </ul>
         </section>
@@ -250,7 +182,7 @@ export default function RecommenderSystemThroughHhlPage() {
             Schedule
           </h2>
           <div className="overflow-x-auto rounded-lg border border-border">
-            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
                   <th className="px-3 py-2.5 font-semibold text-foreground">
@@ -263,12 +195,12 @@ export default function RecommenderSystemThroughHhlPage() {
                     Summary
                   </th>
                   <th className="px-3 py-2.5 font-semibold text-foreground">
-                    Material
+                    Page
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {SCHEDULE.map((row) => (
+                {RSHHL_SCHEDULE.map((row) => (
                   <tr
                     key={row.week}
                     className="border-b border-border last:border-b-0"
@@ -283,10 +215,7 @@ export default function RecommenderSystemThroughHhlPage() {
                       {row.summary}
                     </td>
                     <td className="px-3 py-2.5 align-top">
-                      <MaterialCell
-                        slideHref={row.slideHref}
-                        materialHref={row.materialHref}
-                      />
+                      <WeekPageLink week={row.week} />
                     </td>
                   </tr>
                 ))}

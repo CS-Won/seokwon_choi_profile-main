@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import 'katex/dist/katex.min.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -122,4 +123,50 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.qdyn-prose {
+  @apply text-sm leading-relaxed text-foreground md:text-base;
+}
+.qdyn-prose > * + * {
+  @apply mt-4;
+}
+.qdyn-prose h3 {
+  @apply mt-8 mb-2 text-base font-semibold tracking-tight text-foreground md:text-lg;
+}
+.qdyn-prose h4 {
+  @apply mt-5 mb-1 text-sm font-semibold text-foreground md:text-base;
+}
+.qdyn-prose p {
+  @apply leading-relaxed;
+}
+.qdyn-prose ul {
+  @apply ml-5 list-disc space-y-1;
+}
+.qdyn-prose ol {
+  @apply ml-5 list-decimal space-y-1;
+}
+.qdyn-prose li::marker {
+  color: var(--muted-foreground);
+}
+.qdyn-prose code {
+  @apply rounded bg-muted px-1 py-0.5 font-mono text-[0.85em];
+}
+.qdyn-prose strong {
+  @apply font-semibold text-foreground;
+}
+.qdyn-prose em {
+  @apply italic;
+}
+.qdyn-prose figure {
+  @apply my-6;
+}
+.qdyn-prose table {
+  @apply border-collapse;
+}
+.katex-inline {
+  @apply align-baseline;
+}
+.qdyn-prose .katex-display {
+  margin: 0;
 }
