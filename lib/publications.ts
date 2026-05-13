@@ -12,10 +12,10 @@ export const PUBLICATIONS = [
     authors: "T. Chowdhury et al.",
     title:
       "Quantum Simulation of the Real-time Dynamics in the multi-flavor Gross-Neveu Model at the utility scale using Superconducting Quantum Computers",
-    venue: "Preprint",
+    venue: "arXiv:2605.05479",
     year: "2026",
     note: "2nd Author" as const,
-    link: "#",
+    link: "https://arxiv.org/abs/2605.05479",
   },
   {
     authors: "S. Choi et al.",

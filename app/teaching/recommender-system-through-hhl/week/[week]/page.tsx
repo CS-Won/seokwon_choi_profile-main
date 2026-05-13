@@ -77,8 +77,8 @@ export default async function RshhlWeekPage({ params }: Props) {
               </Link>{" "}
               <span className="font-normal text-muted-foreground">(current)</span>
             </span>
-            <Link href="/interests" className="hover:text-foreground">
-              Interests
+            <Link href="/blog" className="hover:text-foreground">
+              Blog
             </Link>
           </nav>
         </header>

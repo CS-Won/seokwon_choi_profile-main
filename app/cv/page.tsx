@@ -40,7 +40,7 @@ export default function CvPage() {
             </h2>
             <div className="relative border-l-2 border-border pl-6">
               <TimelineItem
-                title="B.S. in Physics, B.S. in Integrated Technology"
+                title="B.S. in Physics, B.S. in Circuits and Systems for Intelligent Semiconductor Technology"
                 subtitle="Yonsei University"
                 period="Feb 2021 — Present"
                 description="GPA: 3.8/4.3 | Expected graduation: mid 2027"
@@ -58,7 +58,7 @@ export default function CvPage() {
               <TimelineItem
                 title="EAP Exchange Student"
                 subtitle="UC Santa Barbara"
-                period="Fall 2025 — Present"
+                period="Fall 2025 — Spring 2026"
               />
             </div>
           </section>
@@ -144,16 +144,29 @@ export default function CvPage() {
             </h3>
             <div className="relative border-l-2 border-border pl-6">
               <TimelineItem
-                title="Undergraduate Tutor — Quantum Mechanics I"
-                subtitle="Yonsei University"
+                title="Quantum Dynamics using Quantum Computer — Lecturer"
+                subtitle="QISCA"
                 period="Spring 2025"
-                description="Led weekly problem-solving sessions using Griffiths."
               />
               <TimelineItem
-                title="Instructor — Introduction to Quantum Computing (10-week)"
-                subtitle="Online Curriculum"
+                title="Quantum Machine Learning — Lecturer"
+                subtitle="QIYA"
+                period="Spring 2025"
+              />
+              <TimelineItem
+                title="Quantum Mechanics — Tutor"
+                subtitle="Yonsei University"
+                period="Spring 2025"
+              />
+              <TimelineItem
+                title="Introduction to Quantum Computing — Lecturer"
+                subtitle="Yonsei University"
                 period="Winter 2024"
-                description="Designed and taught undergraduate-level QC curriculum (qubits, gates, Shor's Algorithm, QML)."
+              />
+              <TimelineItem
+                title="Recommender System: through HHL — Lecturer"
+                subtitle="QISCA"
+                period="Winter 2024"
               />
               <TimelineItem
                 title="Qiskit Fall Festival 2024 in Yonsei — Organizer"

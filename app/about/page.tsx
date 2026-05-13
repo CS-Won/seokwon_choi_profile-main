@@ -76,9 +76,11 @@ export default function AboutPage() {
           <div className="space-y-4 leading-relaxed text-foreground">
             <p>
               I am an undergraduate student at Yonsei University pursuing a
-              double major in Physics and Integrated Technology. My research
-              interests lie in Quantum Computations, Quantum Error Mitigation,
-              Quantum Error Correction, and Quantum Algorithms.
+              double major in Physics and Circuits and Systems for Intelligent
+              Semiconductor Technology. I am interested in techniques for
+              solving complex physical problems with quantum computers, as
+              well as in methods for mitigating and correcting errors that
+              arise on real quantum hardware.
             </p>
             <p>
               I have hands-on experience building and benchmarking

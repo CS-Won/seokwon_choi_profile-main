@@ -10,7 +10,7 @@ const ITEMS = [
   { href: "/cv", label: "CV" },
   { href: "/publications", label: "Publications" },
   { href: "/teaching", label: "Teaching & Coursework" },
-  { href: "/interests", label: "Interests" },
+  { href: "/blog", label: "Blog" },
 ] as const
 
 export function SiteNav({ className }: { className?: string }) {
