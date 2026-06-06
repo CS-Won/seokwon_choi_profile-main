@@ -21,7 +21,7 @@ export const PUBLICATIONS = [
     authors: "S. Choi et al.",
     title:
       "Unified Framework for Extending Distance-5 Quantum Error Correction Codes",
-    venue: "Preprint",
+    venue: "Research in progress",
     year: "2026",
     note: "1st Author" as const,
     link: "#",

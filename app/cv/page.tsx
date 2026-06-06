@@ -82,7 +82,7 @@ export default function CvPage() {
               <TimelineItem
                 title="Quantum Sensing and Imaging Lab — Prof. Ania Bleszynski Jayich"
                 subtitle="UC Santa Barbara"
-                period="Feb 2026 — Present"
+                period="Feb 2026 — May 2026"
                 description="Hamiltonian simulation of NV dipole XXZ and other complex systems numerically."
               />
               <TimelineItem
