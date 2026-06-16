@@ -59,6 +59,7 @@ export default function CvPage() {
                 title="EAP Exchange Student"
                 subtitle="UC Santa Barbara"
                 period="Fall 2025 — Spring 2026"
+                description="GPA: 3.7/4.0"
               />
             </div>
           </section>
